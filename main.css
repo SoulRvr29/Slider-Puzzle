@@ -117,14 +117,17 @@ h1 {
   z-index: 4;
   left: 0.6rem;
   top: 8rem;
-  border: 1px solid white;
+  border: 2px solid rgb(179, 147, 122);
+  background-color: rgb(105, 84, 59);
   border-radius: 5rem;
   padding-bottom: 2px;
   padding-right: 2px;
+  transition: all 0.2s;
 }
 .goBack:hover {
   cursor: pointer;
-  color: var(--title);
+  color: white;
+  border-color: white;
 }
 .imgList {
   position: absolute;
@@ -194,21 +197,37 @@ nav {
 .movesCounter {
   margin-left: -2rem;
 }
-.imagesBtn:hover,
+.templateBtn {
+  justify-self: center;
+  width: 1rem;
+}
 .templateBtn:hover,
 .restartBtn:hover {
+  color: rgb(212, 129, 21);
+}
+.templateBtn,
+.restartBtn,
+.imagesBtn {
+  transition: all 0.2s;
   cursor: pointer;
-  color: var(--title);
 }
 i {
   font-size: 1.5rem;
 }
 .templateBtn i {
   font-size: 2rem;
-  /* position: absolute; */
-  /* right: 4rem; */
 }
-
+.imagesBtn {
+  background-color: rgb(105, 84, 59);
+  border: 2px solid rgb(179, 147, 122);
+  padding: 1px 8px 3px 8px;
+  border-radius: 0.6rem;
+}
+.imagesBtn:hover {
+  cursor: pointer;
+  color: white;
+  border-color: white;
+}
 /***   MAIN  ***/
 main {
   display: grid;
