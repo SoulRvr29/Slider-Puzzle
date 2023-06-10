@@ -192,23 +192,24 @@ function progressLoad() {
   }
   console.log(progress);
   for (let i = 0; i < progress.length; i++) {
-    if (progress[i] === "1") {
-      document.querySelector(`.img${i} .icon-ok`).style.display = "grid";
-    } else {
+    if (progress[i] === "0") {
       document.querySelector(`.img${i} .icon-ok`).style.display = "none";
+    } else {
+      document.querySelector(`.img${i} .icon-ok`).style.display = "grid";
+      document.querySelector(`.img${i} .thumbMoves`).innerHTML = progress[i];
     }
   }
 }
 
 function progressUpdate() {
-  progress[actualImage] = "1"; // 1 == complete
+  progress[actualImage] = `${moves}`; // 1 == complete
   document.querySelector(`.img${actualImage} .thumbMoves`).innerHTML = moves;
   console.log(progress);
   for (let i = 0; i < progress.length; i++) {
-    if (progress[i] === "1") {
-      document.querySelector(`.img${i} .icon-ok`).style.display = "grid";
-    } else {
+    if (progress[i] === "0") {
       document.querySelector(`.img${i} .icon-ok`).style.display = "none";
+    } else {
+      document.querySelector(`.img${i} .icon-ok`).style.display = "grid";
     }
     localStorage.setItem("Sliding puzzle progress", progress);
   }
