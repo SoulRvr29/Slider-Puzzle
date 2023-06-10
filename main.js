@@ -157,7 +157,7 @@ function restart() {
     tile.style.cursor = "pointer";
   });
   moves = 0;
-  movesCouter.innerHTML = `moves:${moves}`;
+  movesCouter.innerHTML = `moves: ${moves}`;
   // mainImage.style.display = "flex";
   // setTimeout(() => {
   //   mainImage.style.opacity = "1";
@@ -202,6 +202,7 @@ function progressLoad() {
 
 function progressUpdate() {
   progress[actualImage] = "1"; // 1 == complete
+  document.querySelector(`.img${actualImage} .thumbMoves`).innerHTML = moves;
   console.log(progress);
   for (let i = 0; i < progress.length; i++) {
     if (progress[i] === "1") {
@@ -319,6 +320,6 @@ function arrayTo2d(arr) {
 function generateThumbials(amount) {
   let imgList = document.querySelector(".imgList");
   for (let i = 0; i < amount; i++) {
-    imgList.innerHTML += `<div class="img${i} thumb"><i class="icon-ok"></i><img src="images/img${i}.jpg" alt="img${i}" /></div>`;
+    imgList.innerHTML += `<div class="img${i} thumb"><div class="thumbMoves"></div><i class="icon-ok"></i><img src="images/img${i}.jpg" alt="img${i}" /></div>`;
   }
 }

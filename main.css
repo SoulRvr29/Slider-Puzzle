@@ -156,7 +156,8 @@ h1 {
 .icon-ok {
   display: none;
   font-size: 2rem;
-  color: rgb(255, 174, 0);
+  text-shadow: 2px 2px 5px black;
+  color: rgb(0, 192, 26);
   position: absolute;
   bottom: 0;
   right: 0;
@@ -164,6 +165,15 @@ h1 {
   align-items: end;
   padding: 10px 3px;
   z-index: 2;
+}
+.thumbMoves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0 0 12px 12px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 2px 8px 3px 8px;
+  border-radius: 10px;
 }
 .thumb:hover {
   filter: brightness(1.2);
@@ -311,6 +321,7 @@ main {
 
 /***   FOOTER   ***/
 footer {
+  font-size: 0.9rem;
   text-transform: none;
   display: flex;
   justify-content: center;
@@ -327,7 +338,7 @@ footer {
   box-shadow: 0px -10px 35px 0px rgba(0, 0, 0, 0.75);
 }
 .copyR {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0 6px 4px 6px;
 }
 /***   MEDIA QUERY   ***/
@@ -335,6 +346,11 @@ footer {
   header {
     background-size: cover;
     height: max(4rem, 15vw);
+  }
+}
+@media screen and (max-width: 550px) {
+  footer {
+    background-size: cover;
   }
 }
 @media screen and (max-width: 450px) {
@@ -361,7 +377,7 @@ footer {
     font-size: 1rem;
   }
   footer {
-    background-size: cover;
+    font-size: 0.7rem;
   }
 }
 @media screen and (max-width: 320px) {
