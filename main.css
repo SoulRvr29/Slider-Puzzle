@@ -176,11 +176,13 @@ h1 {
 nav {
   list-style-type: none;
   display: flex;
-
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
   margin: 0 1.5rem;
+}
+.movesCounter {
+  margin-left: -2rem;
 }
 .imagesBtn:hover,
 .templateBtn:hover,
@@ -188,12 +190,13 @@ nav {
   cursor: pointer;
   color: var(--title);
 }
-.templateBtn {
-  position: absolute;
-  right: 4rem;
-}
 i {
   font-size: 1.5rem;
+}
+.templateBtn i {
+  font-size: 2rem;
+  /* position: absolute; */
+  /* right: 4rem; */
 }
 
 /***   MAIN  ***/
@@ -201,7 +204,7 @@ main {
   display: grid;
   position: fixed;
   gap: 1rem;
-  margin-top: 10rem;
+  margin-top: 8rem;
   max-width: 600px;
   width: 100%;
 }
@@ -309,8 +312,9 @@ main {
 /***   FOOTER   ***/
 footer {
   text-transform: none;
-  display: grid;
-  place-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 3;
   bottom: 0px;
   background-image: url(images/bkgDown.jpg);
@@ -322,7 +326,10 @@ footer {
   bottom: 0;
   box-shadow: 0px -10px 35px 0px rgba(0, 0, 0, 0.75);
 }
-
+.copyR {
+  font-size: 1.5rem;
+  padding: 0 6px 4px 6px;
+}
 /***   MEDIA QUERY   ***/
 @media screen and (max-width: 780px) {
   header {
