@@ -18,34 +18,200 @@ const completePattern = [
   ["t13", "t14", "t15", "t16"],
 ];
 
+generateThumbials(29);
+// localStorage.clear("Sliding puzzle progress");
+let progress = localStorage.getItem("Sliding puzzle progress");
+
 let randomArray = createRandomArray(16);
 let actualPosition = arrayTo2d(randomArray);
 let boardClickLock = false;
+let moves = 0;
 pasteTiles(randomArray);
+let actualImage = 0;
+progressLoad();
 
 const tiles = document.querySelectorAll(".tile");
+const mainImage = document.querySelector(".mainImage");
 
-/***   EVENT LISTENER   ***/
+const thumbials = document.querySelectorAll(".imgList img");
+const imgList = document.querySelector(".imgList");
+
+const imagesBtn = document.querySelector(".imagesBtn");
+const movesCouter = document.querySelector(".movesCounter");
+const restartBtn = document.querySelector(".restartBtn");
+const templateBtn = document.querySelector(".templateBtn");
+const goBack = document.querySelector(".goBack");
+const complete = document.querySelector(".complete");
+
+/***************************/
+/***   EVENT LISTENERS   ***/
+/***************************/
+/* Complete screen */
+complete.addEventListener("click", () => {
+  complete.style.opacity = "0";
+  setTimeout(() => {
+    complete.style.display = "none";
+  }, 1010);
+});
+
+/* Go back */
+goBack.addEventListener("click", () => {
+  imgList.style.opacity = "0";
+  // overlay.style.opacity = "0";
+  setTimeout(() => {
+    // overlay.style.display = "none";
+    imgList.style.display = "none";
+  }, 1000);
+});
+
+/* Images */
+imagesBtn.addEventListener("click", () => {
+  // overlay.style.display = "flex";
+  imgList.style.display = "flex";
+  setTimeout(() => {
+    imgList.style.opacity = "100%";
+    // overlay.style.opacity = "100%";
+  }, 10);
+  complete.style.opacity = "0";
+  setTimeout(() => {
+    complete.style.display = "none";
+  }, 1010);
+});
+
+/* Template */
+let tempBtnPos = false;
+templateBtn.addEventListener("click", () => {
+  if (tempBtnPos == true) {
+    tempBtnPos = false;
+    mainImage.style.display = "flex";
+    setTimeout(() => {
+      mainImage.style.opacity = "1";
+    }, 5);
+  } else {
+    tempBtnPos = true;
+    mainImage.style.opacity = "0";
+    setTimeout(() => {
+      mainImage.style.display = "none";
+    }, 1000);
+  }
+});
+
+/* Restart */
+restartBtn.addEventListener("click", restart);
+
+/* Thumbials */
+thumbials.forEach((thumb) => {
+  tempBtnPos = false;
+  thumb.addEventListener("click", () => {
+    actualImage = thumb.alt.substr(3, thumb.alt.length);
+    console.log(actualImage);
+    mainImage.style.backgroundImage = `url(images/${thumb.alt}.jpg)`;
+    tiles.forEach((tile) => {
+      tile.style.backgroundImage = `url(images/${thumb.alt}.jpg)`;
+    });
+    imgList.style.opacity = "0";
+    // overlay.style.opacity = "0";
+    setTimeout(() => {
+      // overlay.style.display = "none";
+      imgList.style.display = "none";
+      restart();
+    }, 1000);
+    mainImage.style.display = "flex";
+    setTimeout(() => {
+      mainImage.style.opacity = "1";
+    }, 5);
+  });
+});
+
+/* Main Image */
+mainImage.addEventListener("click", () => {
+  tempBtnPos = true;
+  mainImage.style.opacity = "0";
+  setTimeout(() => {
+    mainImage.style.display = "none";
+  }, 1000);
+});
+
+/* Single Tile */
 tiles.forEach((tile) => {
   tile.addEventListener("click", () => {
     if (boardClickLock == false) {
       let clickedTilePos = checkTilePosition(tile.id);
       moveTile(tile.id, clickedTilePos);
-      setTimeout(() => completionCheck(), 500);
+      setTimeout(() => completionCheck(), 300);
     }
   });
 });
 
+/*********************/
 /***   FUNCTIONS   ***/
+/*********************/
+function restart() {
+  randomArray = createRandomArray(16);
+  actualPosition = arrayTo2d(randomArray);
+  boardClickLock = false;
+  pasteTiles(randomArray);
+  document.querySelector("#t16").classList.add("hide");
+  tiles.forEach((tile) => {
+    tile.classList.add("border");
+    tile.style.cursor = "pointer";
+  });
+  moves = 0;
+  movesCouter.innerHTML = `moves:${moves}`;
+  // mainImage.style.display = "flex";
+  // setTimeout(() => {
+  //   mainImage.style.opacity = "1";
+  // }, 5);
+}
+
 function completionCheck() {
   if (actualPosition.toString() == completePattern.toString()) {
+    boardClickLock = true;
     document.querySelector("#t16").classList.toggle("hide");
     tiles.forEach((tile) => {
       tile.classList.toggle("border");
       tile.style.cursor = "default";
+      complete.innerHTML = `Puzzle complete!<br />in ${moves} moves`;
+      complete.style.display = "grid";
+      setTimeout(() => {
+        complete.style.opacity = "100%";
+      }, 10);
     });
-    boardClickLock = true;
+    progressUpdate();
   }
+}
+
+function progressLoad() {
+  if (progress === null) {
+    progress = [];
+    for (let i = 0; i < 29; i++) {
+      progress.push("0");
+    }
+  } else {
+    progress = progress.split(",");
+  }
+  console.log(progress);
+  for (let i = 0; i < progress.length; i++) {
+    if (progress[i] === "1") {
+      document.querySelector(`.img${i} .icon-ok`).style.display = "grid";
+    } else {
+      document.querySelector(`.img${i} .icon-ok`).style.display = "none";
+    }
+  }
+}
+
+function progressUpdate() {
+  progress[actualImage] = "1"; // 1 == complete
+  console.log(progress);
+  for (let i = 0; i < progress.length; i++) {
+    if (progress[i] === "1") {
+      document.querySelector(`.img${i} .icon-ok`).style.display = "grid";
+    } else {
+      document.querySelector(`.img${i} .icon-ok`).style.display = "none";
+    }
+    localStorage.setItem("Sliding puzzle progress", progress);
+  }
+  // console.log(progress);
 }
 
 function moveTile(clickedTileName, clickedTilePos) {
@@ -70,6 +236,8 @@ function moveTile(clickedTileName, clickedTilePos) {
 
   if (moveLock == false) {
     // moving the tile
+    moves++;
+    movesCouter.innerHTML = `moves: ${moves}`;
     actualPosition[clickedTilePos[1]][clickedTilePos[0]] = "t16";
     actualPosition[emptyTilePos[1]][emptyTilePos[0]] = clickedTileName;
 
@@ -148,5 +316,9 @@ function arrayTo2d(arr) {
   ];
 }
 
-// console.log(randomArray);
-// console.log(actualPosition);
+function generateThumbials(amount) {
+  let imgList = document.querySelector(".imgList");
+  for (let i = 0; i < amount; i++) {
+    imgList.innerHTML += `<div class="img${i} thumb"><i class="icon-ok"></i><img src="images/img${i}.jpg" alt="img${i}" /></div>`;
+  }
+}

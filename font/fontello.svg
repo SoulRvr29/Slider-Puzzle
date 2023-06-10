@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2023 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="arrows-cw" unicode="&#xe800;" d="M0-150l0 402 402 0-160-160q108-107 258-107 125 0 222 75t130 192l138 0q-35-173-173-288t-317-114q-207 0-353 146z m10 598q35 174 173 288t317 114q207 0 354-146l146 146 0-402-402 0 160 160q-108 107-258 107-125 0-222-75t-130-192l-138 0z" horiz-adv-x="1000" />
+
+<glyph glyph-name="picture" unicode="&#xe801;" d="M0-68l0 836 1000 0 0-836-1000 0z m76 78l848 0 0 680-848 0 0-680z m90 80l0 59 150 195 102-86 193 291 223-228 0-231-668 0z m0 416q0 37 24 62t62 24q33 0 58-24t24-62q0-33-24-57t-58-25q-37 0-62 25t-24 57z" horiz-adv-x="1000" />
+
+<glyph glyph-name="ok" unicode="&#xe802;" d="M0 260l162 162 166-164 508 510 164-164-510-510-162-162-162 164z" horiz-adv-x="1000" />
+
+<glyph glyph-name="left" unicode="&#xe803;" d="M0 350l586 391 0-211 414 0 0-360-414 0 0-211z" horiz-adv-x="1000" />
+</font>
+</defs>
+</svg>
