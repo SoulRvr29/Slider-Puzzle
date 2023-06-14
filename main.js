@@ -296,19 +296,20 @@ function createRandomArray(length) {
 }
 
 function solvableCheck(arr) {
-  // remove empty tile from array
-  // let emptyTileNr = Math.max.apply(null, arr);
-  // for (let i = 0; i < arr.length; i++) {
-  //   if (arr[i] == emptyTileNr) arr.splice(i, 1);
-  // }
+  // remove empty tile from array (empty is last in arr)
+  let emptyTileNr = Math.max.apply(null, arr);
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] == emptyTileNr) arr.splice(i, 1);
+  }
 
   // inversions counting
   let inversions = 0;
   for (let i = 0; i < arr.length; i++) {
     for (let j = i + 1; j < arr.length; j++) {
-      if (arr[i] > arr[j] && arr[j] != arr.length) inversions++;
+      if (arr[i] > arr[j]) inversions++;
     }
   }
+  if (inversions % 2 === 0) arr.push(arr.length + 1);
   console.log(inversions);
   return inversions % 2 === 0;
 }
