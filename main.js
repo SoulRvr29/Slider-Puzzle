@@ -57,20 +57,16 @@ complete.addEventListener("click", () => {
 /* Go back */
 goBack.addEventListener("click", () => {
   imgList.style.opacity = "0";
-  // overlay.style.opacity = "0";
   setTimeout(() => {
-    // overlay.style.display = "none";
     imgList.style.display = "none";
   }, 1000);
 });
 
 /* Images */
 imagesBtn.addEventListener("click", () => {
-  // overlay.style.display = "flex";
   imgList.style.display = "flex";
   setTimeout(() => {
     imgList.style.opacity = "100%";
-    // overlay.style.opacity = "100%";
   }, 10);
   complete.style.opacity = "0";
   setTimeout(() => {
@@ -104,7 +100,7 @@ thumbials.forEach((thumb) => {
   tempBtnPos = false;
   thumb.addEventListener("click", () => {
     actualImage = thumb.alt.substr(3, thumb.alt.length);
-    console.log(actualImage);
+    // console.log(actualImage);
     mainImage.style.backgroundImage = `url(images/${thumb.alt}.jpg)`;
     tiles.forEach((tile) => {
       tile.style.backgroundImage = `url(images/${thumb.alt}.jpg)`;
@@ -190,7 +186,7 @@ function progressLoad() {
   } else {
     progress = progress.split(",");
   }
-  console.log(progress);
+  // console.log(progress);
   for (let i = 0; i < progress.length; i++) {
     if (progress[i] === "0") {
       document.querySelector(`.img${i} .icon-ok`).style.display = "none";
@@ -217,6 +213,7 @@ function progressUpdate() {
 }
 
 function moveTile(clickedTileName, clickedTilePos) {
+  console.log(clickedTileName, clickedTilePos);
   let emptyTilePos = checkTilePosition("t16");
   let moveLock = true;
   // checking the possibility of movement
@@ -268,30 +265,54 @@ function checkTilePosition(tile) {
     }
   }
 }
-/* for tests */
+/* for ending tests */
 // function createRandomArray(length) {
-//   arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 15];
+//   arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 //   return arr;
 // }
 
 function createRandomArray(length) {
-  let array = [];
-  let index = 0;
-  // create an array of length
-  while (array.length < length) {
-    array[index] = index + 1;
-    index++;
+  let solvable = false;
+  let newArr = [];
+  while (solvable == false) {
+    let array = [];
+    let index = 0;
+    let arrayLength = length;
+    // create an array of length
+    while (array.length < arrayLength) {
+      array[index] = index + 1;
+      index++;
+    }
+    // console.log(array);
+    let randomArray = [];
+    while (arrayLength--) {
+      let randomNr = Math.floor(Math.random() * (arrayLength + 1));
+      randomArray.push(array[randomNr]);
+      array.splice(randomNr, 1);
+    }
+    solvable = solvableCheck(randomArray);
+    if (solvable == true) newArr = randomArray;
   }
+  console.log(solvable);
+  // console.log(newArr);
+  return newArr;
+}
 
-  let randomArray = [];
-  let randomNr;
-  while (length--) {
-    randomNr = Math.floor(Math.random() * (length + 1));
-    randomArray.push(array[randomNr]);
-    array.splice(randomNr, 1);
+function solvableCheck(arr) {
+  // remove empty tile from array
+  // let emptyTileNr = Math.max.apply(null, arr);
+  // for (let i = 0; i < arr.length; i++) {
+  //   if (arr[i] == emptyTileNr) arr.splice(i, 1);
+  // }
+
+  // inversions counting
+  let inversions = 0;
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] > arr[j] && arr[j] != arr.length) inversions++;
+    }
   }
-
-  return randomArray;
+  return inversions % 2 === 0;
 }
 
 function pasteTiles(randomArray) {
