@@ -100,15 +100,12 @@ thumbials.forEach((thumb) => {
   tempBtnPos = false;
   thumb.addEventListener("click", () => {
     actualImage = thumb.alt.substr(3, thumb.alt.length);
-    // console.log(actualImage);
     mainImage.style.backgroundImage = `url(images/${thumb.alt}.jpg)`;
     tiles.forEach((tile) => {
       tile.style.backgroundImage = `url(images/${thumb.alt}.jpg)`;
     });
     imgList.style.opacity = "0";
-    // overlay.style.opacity = "0";
     setTimeout(() => {
-      // overlay.style.display = "none";
       imgList.style.display = "none";
       restart();
     }, 1000);
@@ -200,7 +197,7 @@ function progressLoad() {
 function progressUpdate() {
   progress[actualImage] = `${moves}`; // 1 == complete
   document.querySelector(`.img${actualImage} .thumbMoves`).innerHTML = moves;
-  console.log(progress);
+  // console.log(progress);
   for (let i = 0; i < progress.length; i++) {
     if (progress[i] === "0") {
       document.querySelector(`.img${i} .icon-ok`).style.display = "none";
@@ -213,7 +210,7 @@ function progressUpdate() {
 }
 
 function moveTile(clickedTileName, clickedTilePos) {
-  console.log(clickedTileName, clickedTilePos);
+  // console.log(clickedTileName, clickedTilePos);
   let emptyTilePos = checkTilePosition("t16");
   let moveLock = true;
   // checking the possibility of movement
@@ -294,7 +291,7 @@ function createRandomArray(length) {
     if (solvable == true) newArr = randomArray;
   }
   console.log(solvable);
-  // console.log(newArr);
+  console.log(newArr);
   return newArr;
 }
 
@@ -312,6 +309,7 @@ function solvableCheck(arr) {
       if (arr[i] > arr[j] && arr[j] != arr.length) inversions++;
     }
   }
+  console.log(inversions);
   return inversions % 2 === 0;
 }
 
