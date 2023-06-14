@@ -18,10 +18,10 @@ const completePattern = [
   ["t13", "t14", "t15", "t16"],
 ];
 
-generateThumbials(29);
+let allImages = 46;
+generateThumbials(allImages);
 // localStorage.clear("Sliding puzzle progress");
 let progress = localStorage.getItem("Sliding puzzle progress");
-
 let randomArray = createRandomArray(16);
 let actualPosition = arrayTo2d(randomArray);
 let boardClickLock = false;
@@ -177,15 +177,15 @@ function completionCheck() {
 function progressLoad() {
   if (progress === null) {
     progress = [];
-    for (let i = 0; i < 29; i++) {
+    for (let i = 0; i < allImages; i++) {
       progress.push("0");
     }
   } else {
     progress = progress.split(",");
   }
   // console.log(progress);
-  for (let i = 0; i < progress.length; i++) {
-    if (progress[i] === "0") {
+  for (let i = 0; i < allImages; i++) {
+    if (progress[i] === "0" || progress[i] === undefined) {
       document.querySelector(`.img${i} .icon-ok`).style.display = "none";
     } else {
       document.querySelector(`.img${i} .icon-ok`).style.display = "grid";
