@@ -203,7 +203,11 @@ function progressUpdate() {
   document.querySelector(`.img${actualImage} .thumbMoves`).innerHTML = moves;
   // console.log(progress);
   for (let i = 0; i < progress.length; i++) {
-    if (progress[i] === "0") {
+    if (
+      progress[i] === "0" ||
+      progress[i] === undefined ||
+      progress[i] === ""
+    ) {
       document.querySelector(`.img${i} .icon-ok`).style.display = "none";
     } else {
       document.querySelector(`.img${i} .icon-ok`).style.display = "grid";
