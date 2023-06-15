@@ -185,7 +185,11 @@ function progressLoad() {
   }
   // console.log(progress);
   for (let i = 0; i < allImages; i++) {
-    if (progress[i] === "0" || progress[i] === undefined) {
+    if (
+      progress[i] === "0" ||
+      progress[i] === undefined ||
+      progress[i] === ""
+    ) {
       document.querySelector(`.img${i} .icon-ok`).style.display = "none";
     } else {
       document.querySelector(`.img${i} .icon-ok`).style.display = "grid";
