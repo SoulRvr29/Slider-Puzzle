@@ -18,7 +18,7 @@ const completePattern = [
   ["t13", "t14", "t15", "t16"],
 ];
 
-let allImages = 46;
+let allImages = 54;
 generateThumbials(allImages);
 // localStorage.clear("Sliding puzzle progress");
 let progress = localStorage.getItem("Sliding puzzle progress");
