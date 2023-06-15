@@ -131,7 +131,7 @@ tiles.forEach((tile) => {
     if (boardClickLock == false) {
       let clickedTilePos = checkTilePosition(tile.id);
       moveTile(tile.id, clickedTilePos);
-      setTimeout(() => completionCheck(), 300);
+      setTimeout(() => completionCheck(), 200);
     }
   });
 });
