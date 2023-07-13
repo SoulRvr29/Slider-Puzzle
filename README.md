@@ -1,5 +1,5 @@
-# Slider-Puzzle
-Slider puzzle mini game.
+# Sliding-Puzzle
+Sliding puzzle mini game.
 
 ## Link
 
