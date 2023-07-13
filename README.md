@@ -1,5 +1,5 @@
 # Sliding-Puzzle
-Sliding puzzle mini game.
+In this mini-game, the player must arrange the picture by moving the tiles, leaving one empty field in the lower right corner.
 
 ## Link
 
