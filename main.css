@@ -249,7 +249,7 @@ main {
   box-shadow: 7px 7px 30px 5px rgba(0, 0, 0, 0.75), var(--tile-brd);
 }
 .mainImage {
-  background-image: url(images/img0.jpg);
+  background-image: url(images/full-res/img0.jpg);
   background-size: contain;
   position: absolute;
   width: 100%;
@@ -269,7 +269,7 @@ main {
   font-size: 3rem;
   font-size: 0;
   text-shadow: 0 0 1rem black;
-  background-image: url(images/img0.jpg);
+  background-image: url(images/full-res/img0.jpg);
   background-size: contain;
   background-size: 400%;
   width: 25%;
