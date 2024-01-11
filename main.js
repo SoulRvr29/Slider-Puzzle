@@ -100,7 +100,6 @@ thumbials.forEach((thumb) => {
   tempBtnPos = false;
   thumb.addEventListener("click", () => {
     actualImage = thumb.alt.substr(3, thumb.alt.length);
-    console.log(thumb);
     mainImage.style.backgroundImage = `url(images/full-res/${thumb.alt}.jpg)`;
     tiles.forEach((tile) => {
       tile.style.backgroundImage = `url(images/full-res/${thumb.alt}.jpg)`;
@@ -194,14 +193,17 @@ function progressLoad() {
       document.querySelector(`.img${i} .icon-ok`).style.display = "none";
     } else {
       document.querySelector(`.img${i} .icon-ok`).style.display = "grid";
+      document.querySelector(`.img${i} .thumbMoves`).style.display = "block";
       document.querySelector(`.img${i} .thumbMoves`).innerHTML = progress[i];
     }
   }
 }
 
 function progressUpdate() {
-  progress[actualImage] = `${moves}`; // 1 == complete
-  document.querySelector(`.img${actualImage} .thumbMoves`).innerHTML = moves;
+  if (Number(progress[actualImage]) > Number(`${moves}`)) {
+    progress[actualImage] = `${moves}`;
+    document.querySelector(`.img${actualImage} .thumbMoves`).innerHTML = moves;
+  } // 1 == complete
   // console.log(progress);
   for (let i = 0; i < progress.length; i++) {
     if (
@@ -350,6 +352,6 @@ function arrayTo2d(arr) {
 function generateThumbials(amount) {
   let imgList = document.querySelector(".imgList");
   for (let i = 0; i < amount; i++) {
-    imgList.innerHTML += `<div class="img${i} thumb"><div class="thumbMoves"></div><i class="icon-ok"></i><img src="images/thumbials/img${i}-thumb.jpg" alt="img${i}" loading="lazy" /></div>`;
+    imgList.innerHTML += `<div class="img${i} thumb"><div class="thumbMoves" style="display:none"></div><i class="icon-ok"></i><img width=300 height=300 src="images/thumbials/img${i}-thumb.jpg" alt="img${i}" loading="lazy" /></div>`;
   }
 }
