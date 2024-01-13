@@ -4,8 +4,9 @@ In this mini-game, the player must arrange the picture by moving the tiles, and 
 
 Link to site: [https://soulrvr29.github.io/Slider-Puzzle/](https://soulrvr29.github.io/Slider-Puzzle/)
 
-## Screenshots
+## Main screen
 
 ![](main-screen.jpg)
 
+## Images list screen
 ![](images-list.jpg)
