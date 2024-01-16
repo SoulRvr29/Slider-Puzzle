@@ -29,6 +29,7 @@ let moves = 0;
 pasteTiles(randomArray);
 let actualImage = 0;
 progressLoad();
+let thumbialsActive = true;
 
 const tiles = document.querySelectorAll(".tile");
 const mainImage = document.querySelector(".mainImage");
@@ -42,6 +43,7 @@ const restartBtn = document.querySelector(".restartBtn");
 const templateBtn = document.querySelector(".templateBtn");
 const goBack = document.querySelector(".goBack");
 const complete = document.querySelector(".complete");
+const start = document.querySelector(".start");
 
 /***************************/
 /***   EVENT LISTENERS   ***/
@@ -99,29 +101,37 @@ restartBtn.addEventListener("click", restart);
 thumbials.forEach((thumb) => {
   tempBtnPos = false;
   thumb.addEventListener("click", () => {
-    actualImage = thumb.alt.substr(3, thumb.alt.length);
-    mainImage.style.backgroundImage = `url(images/full-res/${thumb.alt}.jpg)`;
-    tiles.forEach((tile) => {
-      tile.style.backgroundImage = `url(images/full-res/${thumb.alt}.jpg)`;
-    });
-    imgList.style.opacity = "0";
-    setTimeout(() => {
-      imgList.style.display = "none";
-      restart();
-    }, 1000);
-    mainImage.style.display = "flex";
-    setTimeout(() => {
-      mainImage.style.opacity = "1";
-    }, 5);
+    if (thumbialsActive) {
+      actualImage = thumb.alt.substr(3, thumb.alt.length);
+      mainImage.style.backgroundImage = `url(images/full-res/${thumb.alt}.jpg)`;
+      tiles.forEach((tile) => {
+        tile.style.backgroundImage = `url(images/full-res/${thumb.alt}.jpg)`;
+      });
+      imgList.style.opacity = "0";
+      thumbialsActive = false;
+      setTimeout(() => {
+        imgList.style.display = "none";
+        thumbialsActive = true;
+        restart();
+      }, 1000);
+      mainImage.style.display = "flex";
+      start.style.display = "grid";
+      setTimeout(() => {
+        mainImage.style.opacity = "1";
+        start.style.opacity = "1";
+      }, 5);
+    }
   });
 });
 
 /* Main Image */
-mainImage.addEventListener("click", () => {
+start.addEventListener("click", () => {
   tempBtnPos = true;
   mainImage.style.opacity = "0";
+  start.style.opacity = "0";
   setTimeout(() => {
     mainImage.style.display = "none";
+    start.style.display = "none";
   }, 1000);
 });
 
@@ -200,7 +210,13 @@ function progressLoad() {
 }
 
 function progressUpdate() {
-  if (Number(progress[actualImage]) > Number(`${moves}`)) {
+  console.log(Number(progress[actualImage]) > Number(`${moves}`));
+  console.log(progress[actualImage] == "0");
+  if (
+    Number(progress[actualImage]) > Number(`${moves}`) ||
+    progress[actualImage] == "0"
+  ) {
+    console.log("sdffdfs");
     progress[actualImage] = `${moves}`;
     document.querySelector(`.img${actualImage} .thumbMoves`).innerHTML = moves;
   } // 1 == complete
@@ -212,8 +228,10 @@ function progressUpdate() {
       progress[i] === ""
     ) {
       document.querySelector(`.img${i} .icon-ok`).style.display = "none";
+      document.querySelector(`.img${i} .thumbMoves`).style.display = "none";
     } else {
       document.querySelector(`.img${i} .icon-ok`).style.display = "grid";
+      document.querySelector(`.img${i} .thumbMoves`).style.display = "grid";
     }
     localStorage.setItem("Sliding puzzle progress", progress);
   }

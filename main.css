@@ -108,6 +108,19 @@ h1 {
   transition: opacity 1s;
   display: none;
 }
+.start {
+  font-size: min(10vw, 4rem);
+  color: rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0, 0.4);
+  display: grid;
+  place-content: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  transition: opacity 1s;
+  cursor: pointer;
+}
 .complete:hover {
   cursor: pointer;
 }
